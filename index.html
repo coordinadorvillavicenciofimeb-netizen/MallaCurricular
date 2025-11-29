@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Plan de estudios de Ingeniería Electrónica - FIMEB" />
+<title>Plan de Estudios - Ingeniería Electrónica</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --azul-uan: #002E5F;
+  --azul-basicas: #107acc;
+  --morado-ciencias-ingenieria: #5e3d66;
+  --naranja-aplicada: #c78b00;
+  --gris-formcomp: #9b9b9b;
+  --amarillo-facultad: #C5A100;
+  --sombra: 0 2px 8px rgba(0,0,0,0.1);
+  --border-radius: 15px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb;
+  color: #002E5F;
+  overflow-x: hidden;
+}
+
+.contenedor { width: 100%; max-width: 1900px; margin: 0 auto; padding: 0; }
+
+header {
+  background-color: var(--azul-uan);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;
+  border-radius: 0 0 25px 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+header img { height: 110px; width: auto; }
+.titulo { font-size: 2rem; font-weight: 600; flex: 1; min-width: 300px; }
+.facultad { color: var(--amarillo-facultad); font-size: 1.8rem; font-weight: 700; margin-top: 8px; }
+
+.tabla-container { width: 100%; padding: 0 20px; box-sizing: border-box; margin-bottom: 15px; }
+.tabla-scroll { width: 100%; overflow-x: hidden; }
+.tabla-semestres { display: flex; gap: 15px; flex-wrap: wrap; }
+
+.columna-semestre { flex: 1; min-width: 0; }
+.columna-semestre h3 {
+  background-color: var(--azul-uan);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+
+.semestre {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 15px;
+  border-top: 8px solid var(--azul-uan);
+  font-size: 0.95rem;
+  min-height: 400px;
+}
+
+.materia { margin-bottom: 12px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+.mat-Basicas { border-left: 8px solid var(--azul-basicas); padding-left: 10px; }
+.mat-CienciasIngenieria { border-left: 8px solid var(--morado-ciencias-ingenieria); padding-left: 10px; }
+.mat-IngAplicada { border-left: 8px solid var(--naranja-aplicada); padding-left: 10px; }
+.mat-FormComp { border-left: 8px solid var(--gris-formcomp); padding-left: 10px; }
+.materia small { color: #555; display: block; margin-top: 4px; font-size: 0.8rem; }
+
+.creditos-leyenda, .leyenda, .info-section {
+  margin: 15px auto;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--sombra);
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.color-box { width: 25px; height: 25px; border-radius: 6px; margin-right: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+.info-item { font-size: 1rem; color: var(--azul-uan); margin: 5px 0; text-align: center; flex: 1; min-width: 150px; }
+
+/* Móviles: compacta y scroll */
+@media (max-width: 1024px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header img { margin-top: 10px; order: -1; }
+  .titulo { font-size: 1rem; font-weight: 400; }
+  .facultad { font-size: 0.95rem; font-weight: 400; }
+
+  /* Tabla scroll horizontal compacta */
+  .tabla-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tabla-semestres {
+    flex-wrap: nowrap;
+    min-width: auto;
+  }
+  .columna-semestre {
+    min-width: 200px;
+    flex: 0 0 auto;
+  }
+  .semestre {
+    padding: 10px;
+    font-size: 0.85rem;
+    min-height: 300px;
+  }
+  .materia { margin-bottom: 8px; padding-bottom: 6px; font-size: 0.85rem; }
+  .materia small { font-size: 0.75rem; }
+
+  /* Leyenda scrollable horizontal */
+  .leyenda { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; font-size: 0.9rem; -webkit-overflow-scrolling: touch; }
+  .leyenda-item { flex: 0 0 auto; white-space: nowrap; margin-right: 15px; text-align: center; }
+
+  /* SNIES vertical */
+  .info-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 0.9rem;
+  }
+  .info-item { flex: none; white-space: nowrap; text-align: left; font-size: 0.9rem; }
+
+  /* Créditos scrollable */
+  .creditos-leyenda {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    font-size: 0.9rem;
+  }
+  .creditos-leyenda .info-item { flex: 0 0 auto; white-space: nowrap; margin-right: 20px; }
+}
+
+/* PC: Leyenda y Créditos centrados */
+@media (min-width: 1025px) {
+  .creditos-leyenda {
+    justify-content: center;
+    flex-wrap: nowrap;
+    font-size: 1rem;
+  }
+  .creditos-leyenda .info-item {
+    flex: none;
+    margin: 0 15px;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .leyenda {
+    justify-content: center;
+    flex-wrap: nowrap;
+    font-size: 1rem;
+  }
+  .leyenda-item {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+    white-space: nowrap;
+  }
+  .leyenda-item .color-box {
+    margin-right: 8px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="contenedor">
+  <header>
+    <div class="titulo">
+      <div>Facultad de Ingeniería Mecánica, Electrónica y Biomédica - FIMEB</div>
+      <div class="facultad">Ingeniería Electrónica - Plan de estudio 2652</div>
+    </div>
+    <img src="https://i.postimg.cc/PqLK6PtM/logo-UAN.png" alt="Logo UAN" />
+  </header>
+
+  <div class="tabla-container">
+    <div class="tabla-scroll">
+      <div class="tabla-semestres">
+
+
+
+
+
+
+          <!-- SEMESTRE 1 -->
+       <div class="columna-semestre">
+          <h3>1°</h3>
+          <div class="semestre">
+            <div class="materia mat-Basicas">Cálculo Diferencial <small>17434001 [4]</small></div>
+            <div class="materia mat-Basicas">Física Mecánica <small>17444001 [4]</small></div>
+            <div class="materia mat-CienciasIngenieria">Lógica Computacional <small>50493101 [3]</small></div>
+            <div class="materia mat-Basicas">Solución de Problemas Matemáticos <small>17432005 [3]</small></div>
+            <div class="materia mat-FormComp">Cátedra Antonio Nariño <small>27472004 [2]</small></div>
+            <div class="materia mat-CienciasIngenieria">Introducción a la Ingeniería <small>50412413 [2]</small></div>
+          </div>
+        </div>
+        <!-- SEMESTRE 2 -->
+        <div class="columna-semestre">
+          <h3>2°</h3>
+          <div class="semestre">
+            <div class="materia mat-Basicas">Cálculo Integral <small>17434002 [4]<br>PR: Cálculo Diferencial</small></div>
+            <div class="materia mat-Basicas">Electricidad y Magnetismo <small>17444002 [4]<br>PR: Cálculo Diferencial</small></div>
+            <div class="materia mat-CienciasIngenieria">Programación de Computadores <small>50493102 [3]<br>PR: Lógica Computacional</small></div>
+            <div class="materia mat-CienciasIngenieria">Análisis de Circuitos DC <small>50444150 [3]<br>PR: Solución de Problemas Matemáticos</small></div>
+            <div class="materia mat-CienciasIngenieria">Lógica y Circuitos Digitales <small>50443451 [3]</small></div>
+          </div>
+        </div>
+        <!-- SEMESTRE 3 -->
+        <div class="columna-semestre">
+          <h3>3°</h3>
+          <div class="semestre">
+            <div class="materia mat-Basicas">Cálculo Multivariado y Álgebra Lineal <small>17434003 [4]<br>PR: Cálculo Integral</small></div>
+            <div class="materia mat-Basicas">Ecuaciones Diferenciales y en Diferencia <small>17434004 [3]<br>PR: Cálculo Integral</small></div>
+            <div class="materia mat-FormComp">Electiva Institucional <small>20062052 [2]</small></div>
+            <div class="materia mat-Basicas">Vibraciones y Ondas <small>17444003 [4]<br>PR: Electricidad y Magnetismo</small></div>
+            <div class="materia mat-CienciasIngenieria">Dispositivos Electrónicos <small>50443350 [3]<br>PR: Análisis de Circuitos DC</small></div>
+            <div class="materia mat-FormComp">Administración y Economía <small>40442000 [2]</small></div>
+          </div>
+        </div>
+        <!-- SEMESTRE 4 -->
+        <div class="columna-semestre">
+          <h3>4°</h3>
+          <div class="semestre">
+            <div class="materia mat-CienciasIngenieria">Modelación y Simulación en Ingeniería <small>50443250 [3]</small></div>
+            <div class="materia mat-Basicas">Probabilidad y Estadística <small>17434101 [4]</small></div>
+            <div class="materia mat-FormComp">Electiva Humanística <small>20062051 [2]</small></div>
+            <div class="materia mat-CienciasIngenieria">Análisis de Circuitos AC <small>50444152 [3]<br>PR: Análisis de Circuitos DC</small></div>
+            <div class="materia mat-CienciasIngenieria">Circuitos Integrados Analógicos <small>50443354 [3]<br>PR: Dispositivos Electrónicos</small></div>
+            <div class="materia mat-CienciasIngenieria">Procesadores y Microcontroladores <small>50443452 [3]<br>PR: Lógica y Circuitos Digitales</small></div>
+          </div>
+        </div>
+        <!-- SEMESTRE 5 -->
+        <div class="columna-semestre">
+          <h3>5°</h3>
+          <div class="semestre">
+            <div class="materia mat-CienciasIngenieria">Propagación y Medios de Transmisión <small>50443200 [3]<br>PR: Cálculo Multivariado y Álgebra Lineal</small></div>
+            <div class="materia mat-CienciasIngenieria">Señales y Sistemas <small>50443551 [3]<br>PR: Cálculo Multivariado y Álgebra Lineal</small></div>
+            <div class="materia mat-CienciasIngenieria">Sistemas Dinámicos <small>50443650 [3]<br>PR: Ecuaciones Diferenciales y en Diferencia</small></div>
+            <div class="materia mat-CienciasIngenieria">Electrónica de Radiofrecuencia <small>50443355 [3]<br>PR: Circuitos Integrados Analógicos</small></div>
+            <div class="materia mat-FormComp">Proyecto Interdisciplinario I <small>50442300 [2]</small></div>
+            <div class="materia mat-IngAplicada">Electiva I <small>50442750 [2]</small></div>
+          </div>
+        </div>
+        <!-- SEMESTRE 6 -->
+        <div class="columna-semestre">
+          <h3>6°</h3>
+          <div class="semestre">
+            <div class="materia mat-IngAplicada">Sistemas de Control Automático <small>50443653 [3]<br>PR: Señales y Sistemas</small></div>
+            <div class="materia mat-IngAplicada">Procesamiento Digital de Señales <small>50443254 [3]<br>PR: Señales y Sistemas</small></div>
+            <div class="materia mat-IngAplicada">Electrónica de Potencia <small>50443353 [3]<br>PR: Circuitos Integrados Analógicos</small></div>
+            <div class="materia mat-IngAplicada">Instrumentación Electrónica y Sensores Industriales <small>50443600 [3]<br>PR: Circuitos Integrados Analógicos</small></div>
+            <div class="materia mat-IngAplicada">Electiva II <small>50442751 [2]</small></div>
+            <div class="materia mat-FormComp">Formulación y Gestión de Proyectos <small>50442853 [2]</small></div>
+          </div>
+        </div>
+        <!-- SEMESTRE 7 -->
+        <div class="columna-semestre">
+          <h3>7°</h3>
+          <div class="semestre">
+            <div class="materia mat-IngAplicada">Sistemas de Comunicaciones <small>50443201 [3]<br>PR: Propagación y Medios de Transmisión</small></div>
+            <div class="materia mat-FormComp">Proyecto Interdisciplinario II <small>50442301 [2]</small></div>
+            <div class="materia mat-IngAplicada">Autómatas Programables para Industria 4.0 <small>50443601 [3]<br>PR: Electrónica de Potencia</small></div>
+            <div class="materia mat-IngAplicada">Electiva III <small>50443752 [3]</small></div>
+            <div class="materia mat-FormComp">Normatividad para Ingeniería Electrónica <small>50442500 [2]</small></div>
+            <div class="materia mat-FormComp">Ética y Responsabilidad Social <small>50442501 [2]</small></div>
+            <div class="materia mat-FormComp">Formulación de Trabajo de Grado <small>50442854 [2]<br>PR: Formulación y Gestión de Proyectos</small></div>
+          </div>
+        </div>
+        <!-- SEMESTRE 8 -->
+        <div class="columna-semestre">
+          <h3>8°</h3>
+          <div class="semestre">
+            <div class="materia mat-IngAplicada">Redes y Aplicaciones IoT <small>50443202 [3]<br>PR: Sistemas de Comunicaciones</small></div>
+            <div class="materia mat-IngAplicada">Inteligencia Artificial Aplicada a Sistemas Electrónicos <small>50443603 [3]<br>PR: Procesamiento Digital de Señales</small></div>
+            <div class="materia mat-IngAplicada">Integración Electrónica de Sistemas de Energía Renovable <small>50443602 [3]<br>PR: Electrónica de Potencia</small></div>
+            <div class="materia mat-IngAplicada">Electiva IV <small>50443753 [3]</small></div>
+            <div class="materia mat-FormComp">Innovación y Planes de Negocios <small>40442100 [2]</small></div>
+            <div class="materia mat-IngAplicada">Trabajo de Grado <small>50444852 [4]<br>PR: Formulación de Trabajo de Grado</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+
+
+<!-- Créditos y Leyenda -->
+  <div class="creditos-leyenda">
+    <div class="info-item"><strong>[C]</strong>: Créditos</div>
+    <div class="info-item"><strong>PR</strong>: Prerrequisito</div>
+  </div>
+
+  <div class="leyenda">
+    <div class="leyenda-item"><div class="color-box" style="background: var(--azul-basicas);"></div> Ciencias Básicas</div>
+    <div class="leyenda-item"><div class="color-box" style="background: var(--morado-ciencias-ingenieria);"></div> Ciencias de Ingeniería</div>
+    <div class="leyenda-item"><div class="color-box" style="background: var(--naranja-aplicada);"></div> Ingeniería Aplicada</div>
+    <div class="leyenda-item"><div class="color-box" style="background: var(--gris-formcomp);"></div> Formación Complementaria</div>
+  </div>
+
+  <!-- Info SNIES -->
+  <div class="info-section">
+    <div class="info-item"><strong>Código SNIES del programa:</strong> 6082</div>
+    <div class="info-item"><strong>Resolución de aprobación No.:</strong> 21347</div>
+    <div class="info-item"><strong>Fecha de resolución:</strong> 14/11/2023</div>
+    <div class="info-item"><strong>Vigencia:</strong> 7 años</div>
+    <div class="info-item"><strong>Total de Créditos:</strong> 138</div>
+  </div>
+</div>
+</body>
+</html>
